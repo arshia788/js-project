@@ -17,12 +17,19 @@ buttonTop.addEventListener('click',()=>{
 
     // ! faghat inja man omadam injori mabna ro gharar dadm chon gofteh bodin ke mogeh dadan style {color:red} in shekili vard mikonin man ham hamin jori split ro anjam dadm.
     
-    const [splitResult]= resultStyle.split(':')[1].split("}");
-    console.log(splitResult);
+    const indexCenter= resultStyle.indexOf(':');
+    const indexFirst= resultStyle.indexOf ("{")+1;
+    const indexLast= resultStyle.indexOf ("}");
+
+    console.log(indexFirst, indexCenter, indexLast);
+
+    const style= resultStyle.slice(indexFirst, indexCenter)
+    const changeStyle= resultStyle.slice(indexCenter+1, indexLast)
+    console.log(changeStyle);
 
     const createElement= document.createElement(resultTag);
-    createElement.innerHTML=resultContent
-    createElement.style.color=splitResult
+    createElement.innerHTML=resultContent;
+    createElement.style[style]=changeStyle;
     const firstTag =divTop.children[0];
     
     divTop.insertBefore(createElement, firstTag)
