@@ -11,25 +11,34 @@ buttonTop.innerText='topButton';
 
 
 buttonTop.addEventListener('click',()=>{
+
     const resultTag= tagInput.value;
     const resultContent= tagContent.value;
-    const resultStyle= tagStyle.value
+    const resultStyle= tagStyle.value;
 
-    // ! faghat inja man omadam injori mabna ro gharar dadm chon gofteh bodin ke mogeh dadan style {color:red} in shekili vard mikonin man ham hamin jori split ro anjam dadm.
-    
-    const indexCenter= resultStyle.indexOf(':');
-    const indexFirst= resultStyle.indexOf ("{")+1;
-    const indexLast= resultStyle.indexOf ("}");
-
-    console.log(indexFirst, indexCenter, indexLast);
-
-    const style= resultStyle.slice(indexFirst, indexCenter)
-    const changeStyle= resultStyle.slice(indexCenter+1, indexLast)
-    console.log(changeStyle);
 
     const createElement= document.createElement(resultTag);
     createElement.innerHTML=resultContent;
-    createElement.style[style]=changeStyle;
+    
+    const split=resultStyle.split(' ');
+    console.log(split);
+
+    for(let i of split){
+        const indexFirst= i.indexOf("{")+1;
+        const indexCenter= i.indexOf(":");
+        const indexCenter2= i.indexOf(":");
+        const indexLast= i.indexOf("}");
+
+        console.log(indexFirst, indexCenter, indexLast);
+        const style= i.slice(indexFirst, indexCenter);
+        const change= i.slice(indexCenter2+1, indexLast);
+
+        console.log(style);
+        console.log(change);
+        createElement.style[style]=change;
+    }
+
+
     const firstTag =divTop.children[0];
     
     divTop.insertBefore(createElement, firstTag)
@@ -47,16 +56,34 @@ buttonButtom.innerText='downButtom';
 buttonButtom.addEventListener('click',()=>{
     const resultTag= tagInput.value;
     const resultContent= tagContent.value;
-    const resultStyle= tagStyle.value
+    const resultStyle= tagStyle.value;
 
-    const [splitResult]= resultStyle.split(':')[1].split("}");
-    console.log(splitResult);
 
     const createElement= document.createElement(resultTag);
-    createElement.innerHTML=resultContent
-    createElement.style.color=splitResult
+    createElement.innerHTML=resultContent;
+    
+    const split=resultStyle.split(' ');
+    console.log(split);
 
-    divTop.appendChild(createElement)
+    for(let i of split){
+        const indexFirst= i.indexOf("{")+1;
+        const indexCenter= i.indexOf(":");
+        const indexCenter2= i.indexOf(":");
+        const indexLast= i.indexOf("}");
+
+        console.log(indexFirst, indexCenter, indexLast);
+        const style= i.slice(indexFirst, indexCenter);
+        const change= i.slice(indexCenter2+1, indexLast);
+
+        console.log(style);
+        console.log(change);
+        createElement.style[style]=change;
+    }
+
+
+    const firstTag =divTop.children[0];
+    
+    divTop.appendChild(createElement, firstTag)
 })
 
 divTop.appendChild(buttonButtom)
